@@ -32,13 +32,9 @@
             this.txtMot = new System.Windows.Forms.TextBox();
             this.lblResultat = new System.Windows.Forms.Label();
             this.grpTestLettres = new System.Windows.Forms.GroupBox();
-            this.lblLettres = new System.Windows.Forms.Label();
-            this.btnTest = new System.Windows.Forms.Button();
-            this.cboLettre = new System.Windows.Forms.ComboBox();
             this.btnRejouer = new System.Windows.Forms.Button();
             this.imgPendu = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
-            this.grpTestLettres.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgPendu)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,45 +69,12 @@
             // 
             // grpTestLettres
             // 
-            this.grpTestLettres.Controls.Add(this.lblLettres);
-            this.grpTestLettres.Controls.Add(this.btnTest);
-            this.grpTestLettres.Controls.Add(this.cboLettre);
             this.grpTestLettres.Location = new System.Drawing.Point(12, 83);
             this.grpTestLettres.Name = "grpTestLettres";
-            this.grpTestLettres.Size = new System.Drawing.Size(282, 111);
+            this.grpTestLettres.Size = new System.Drawing.Size(282, 127);
             this.grpTestLettres.TabIndex = 3;
             this.grpTestLettres.TabStop = false;
             this.grpTestLettres.Text = "lettres testées";
-            // 
-            // lblLettres
-            // 
-            this.lblLettres.AutoSize = true;
-            this.lblLettres.Font = new System.Drawing.Font("Consolas", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLettres.Location = new System.Drawing.Point(6, 63);
-            this.lblLettres.Name = "lblLettres";
-            this.lblLettres.Size = new System.Drawing.Size(270, 22);
-            this.lblLettres.TabIndex = 2;
-            this.lblLettres.Text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            // 
-            // btnTest
-            // 
-            this.btnTest.Location = new System.Drawing.Point(66, 19);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(58, 30);
-            this.btnTest.TabIndex = 1;
-            this.btnTest.Text = "TEST";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
-            // 
-            // cboLettre
-            // 
-            this.cboLettre.Font = new System.Drawing.Font("Consolas", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboLettre.FormattingEnabled = true;
-            this.cboLettre.Location = new System.Drawing.Point(6, 19);
-            this.cboLettre.Name = "cboLettre";
-            this.cboLettre.Size = new System.Drawing.Size(54, 30);
-            this.cboLettre.TabIndex = 0;
-            this.cboLettre.SelectedIndexChanged += new System.EventHandler(this.cboLettre_SelectedIndexChanged);
             // 
             // btnRejouer
             // 
@@ -147,8 +110,6 @@
             this.Load += new System.EventHandler(this.frmPendu_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.grpTestLettres.ResumeLayout(false);
-            this.grpTestLettres.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgPendu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -163,9 +124,6 @@
         private System.Windows.Forms.Button btnRejouer;
         private System.Windows.Forms.Label lblResultat;
         private System.Windows.Forms.GroupBox grpTestLettres;
-        private System.Windows.Forms.Label lblLettres;
-        private System.Windows.Forms.Button btnTest;
-        private System.Windows.Forms.ComboBox cboLettre;
     }
 }
 

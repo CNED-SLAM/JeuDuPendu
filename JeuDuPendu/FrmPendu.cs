@@ -28,18 +28,106 @@ namespace JeuDuPendu
         }
 
         /// <summary>
-        /// Rempli le combo avec les lettres de l'alphabet
+        /// Permet de créer les boutons de l'alphabet
         /// </summary>
-        private void RemplirCboLettres()
+        private void CreeBoutons()
         {
-            // vide le combo
-            cboLettre.Items.Clear();
-            // rempli le combo avec les lettres de l'alphabet
-            for (int k = 0; k < 26; k++)
+            // variables locales
+            char[] tAlpha = new char[26]; // tableau des lettres
+            int sizeButton = 30; // taille du côté d'un bouton de lettre
+            int posXButton = 6; // position du 1er bouton à partir de la gauche 
+            int posYButton = 18; // position du 1er bouton à partir du haut
+            int nbLettreParLigne = 9; // détermine le nombre de boutons de lettres par ligne
+            // remplissage du tableau de lettres
+            for (int k = 0; k < tAlpha.Length; k++)
             {
-                cboLettre.Items.Add((char)('A' + k));
+                tAlpha[k] = (char)('A' + k);
             }
-            cboLettre.SelectedIndex = 0;
+
+            // création et positionnement des boutons
+            int line = -1, col = 0;
+            for (int k = 0; k < tAlpha.Length; k++)
+            {
+                // création du bouton
+                Button btn = new Button();
+                // ajout du bouton dans le groupe de boutons pour l'affichage
+                grpTestLettres.Controls.Add(btn);
+                // Ajoute la lettre correspondante au bouton
+                btn.Text = tAlpha[k].ToString();
+                // fixe la taille du bouton
+                btn.Size = new Size(sizeButton, sizeButton);
+                // ajout d'une écoute sur le clic du bouton
+                btn.Click += new System.EventHandler(btnAlpha_Click);
+                // changement de ligne au bout d'un certain nombre de boutons affichés
+                col++;
+                if (k % nbLettreParLigne == 0)
+                {
+                    line++;
+                    col = 0;
+                }
+                // positionne le bouton dans le groupe
+                btn.Location = new Point(posXButton + sizeButton * col, posYButton + sizeButton * line);
+            }
+        }
+
+        /// <summary>
+        /// Active les boutons des lettres
+        /// </summary>
+        private void ActiveBoutons()
+        {
+            // active les boutons
+            for (int k = 0; k < grpTestLettres.Controls.Count; k++)
+            {
+                grpTestLettres.Controls[k].Enabled = true;
+            }
+            grpTestLettres.Controls[0].Focus();
+        }
+
+        /// <summary>
+        /// Rend le focus au bouton de la première lettre non désactivée
+        /// </summary>
+        private void GestionFocusBoutonLettre()
+        {
+            int k = 0;
+            while (!grpTestLettres.Controls[k].Enabled)
+            {
+                k++;
+            }
+            grpTestLettres.Controls[k].Focus();
+        }
+
+        /// <summary>
+        /// Evénement clic sur un des boutons de l'alphabet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAlpha_Click(object sender, EventArgs e)
+        {
+            // récupération du bouton concerné par l'événement
+            Button btnLettre = ((Button)sender);
+            // désactive le bouton et donne le focus au premier bouton accessible
+            btnLettre.Enabled = false;
+            GestionFocusBoutonLettre();
+            // recherche la lettre
+            char lettre = char.Parse(btnLettre.Text);
+            if (!RechercheLettreDansMot(lettre))
+            {
+                // lettre non trouvée : affichage du pendu
+                if (AffichePendu())
+                {
+                    // si totalement pendu, perdu et fin du jeu
+                    FinJeu("PERDU");
+                }
+            }
+            else
+            {
+                // il n'y a plus de lettre à trouver
+                if (txtMot.Text.IndexOf('-') == -1)
+                {
+                    // s'il n'y a plus de tiret (toutes les lettres trouvées) c'est gagné
+                    FinJeu("GAGNE");
+                }
+            }
         }
 
         /// <summary>
@@ -52,8 +140,6 @@ namespace JeuDuPendu
             AfficheImage(etapePendu);
             // désactive la zone de la phase 2 (proposition de lettres)
             grpTestLettres.Enabled = false;
-            // vide le label des lettres
-            lblLettres.Text = "";
             // supprime le message
             lblResultat.Text = "";
             // active, vide et se positionne sur la zone de saisie du mot
@@ -67,14 +153,13 @@ namespace JeuDuPendu
         /// </summary>
         private void PreparationPhase2()
         {
-            // active la zone de la phase 2 (proposition de lettres)
+            // active les boutons et la zone de la phase 2 (proposition de lettres)
+            ActiveBoutons();
             grpTestLettres.Enabled = true;
+            // positionne le focus sur le premier bouton (lettre A)
+            grpTestLettres.Controls[0].Focus();
             // désactive la zone de texte contenant le mot
             txtMot.Enabled = false;
-            // remplit le combo des lettres
-            RemplirCboLettres();
-            // donne le focus au bouton test
-            btnTest.Focus();
         }
 
         /// <summary>
@@ -83,6 +168,7 @@ namespace JeuDuPendu
         /// <param name="num"></param>
         private void AfficheImage(int num)
         {
+//            imgPendu.ImageLocation = Application.StartupPath + "/../../Resources/pendu" + num + ".png";
             imgPendu.Image = (Image)Properties.Resources.ResourceManager.GetObject("pendu" + num);
         }
 
@@ -124,33 +210,6 @@ namespace JeuDuPendu
         }
 
         /// <summary>
-        /// Traitement de la lettre récupérée
-        /// </summary>
-        /// <param name="lettre"></param>
-        private void TraitementLettre(char lettre)
-        {
-            // cherche si la lettre est présente dans le mot
-            if (!RechercheLettreDansMot(lettre))
-            {
-                // lettre non trouvée : affichage du pendu
-                if (AffichePendu())
-                {
-                    // si totalement pendu, perdu et fin du jeu
-                    FinJeu("PERDU");
-                }
-            }
-            else
-            {
-                // il n'y a plus de lettre à trouver
-                if (txtMot.Text.IndexOf('-') == -1)
-                {
-                    // s'il n'y a plus de tiret (toutes les lettres trouvées) c'est gagné
-                    FinJeu("GAGNE");
-                }
-            }
-        }
-
-        /// <summary>
         /// Fin du jeu (gagné ou perdu)
         /// </summary>
         /// <param name="message"></param>
@@ -188,11 +247,14 @@ namespace JeuDuPendu
         /// <summary>
         /// Evénement chargement de la fenêtre
         /// création des boutons des lettres de l'alphabet
+        /// et démarrage du jeu
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void frmPendu_Load(object sender, EventArgs e)
         {
+            // création des boutons des lettres
+            CreeBoutons();
             // préparation des objets graphiques pour la phase 1 (saisie du mot)
             PreparationPhase1();
         }
@@ -241,44 +303,6 @@ namespace JeuDuPendu
         {
             // préparation des objets graphiques pour la phase 1 (saisie du mot)
             PreparationPhase1();
-        }
-
-        /// <summary>
-        /// Evénement clic sur le bouton test
-        /// recherche de la lettre dans le mot
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // récupération de la lettre, affichage et suppression dans le combo
-                char lettre = char.Parse(cboLettre.SelectedItem.ToString());
-                lblLettres.Text += lettre;
-                cboLettre.Items.RemoveAt(cboLettre.SelectedIndex);
-                // traite la lettre (recherche si elle est présente dans le mot)
-                TraitementLettre(lettre);
-                // se positionne sur la 1ère lettre du combo
-                cboLettre.SelectedIndex = 0;
-            }
-            catch
-            {
-                // cas d'une tentative de suppression de lettre alors que le combo est vide
-                // normalement ce cas ne doit pas arriver car le mot doit être trouvé avant
-                grpTestLettres.Enabled = false;
-            }
-        }
-
-        /// <summary>
-        /// Evénement choix d'une lettre dans le combo
-        /// position du focus sur le bouton  test
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cboLettre_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            btnTest.Focus();
         }
     }
 }
