@@ -31,15 +31,15 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtMot = new System.Windows.Forms.TextBox();
             this.lblResultat = new System.Windows.Forms.Label();
-            this.btnRejouer = new System.Windows.Forms.Button();
-            this.imgPendu = new System.Windows.Forms.PictureBox();
             this.grpTestLettres = new System.Windows.Forms.GroupBox();
             this.lblLettres = new System.Windows.Forms.Label();
             this.btnTest = new System.Windows.Forms.Button();
             this.cboLettre = new System.Windows.Forms.ComboBox();
+            this.btnRejouer = new System.Windows.Forms.Button();
+            this.imgPendu = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgPendu)).BeginInit();
             this.grpTestLettres.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgPendu)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -70,24 +70,6 @@
             this.lblResultat.Name = "lblResultat";
             this.lblResultat.Size = new System.Drawing.Size(0, 31);
             this.lblResultat.TabIndex = 4;
-            // 
-            // btnRejouer
-            // 
-            this.btnRejouer.Image = global::JeuDuPendu.Properties.Resources.playagain;
-            this.btnRejouer.Location = new System.Drawing.Point(248, 216);
-            this.btnRejouer.Name = "btnRejouer";
-            this.btnRejouer.Size = new System.Drawing.Size(46, 46);
-            this.btnRejouer.TabIndex = 2;
-            this.btnRejouer.UseVisualStyleBackColor = true;
-            this.btnRejouer.Click += new System.EventHandler(this.btnRejouer_Click);
-            // 
-            // imgPendu
-            // 
-            this.imgPendu.Location = new System.Drawing.Point(304, 12);
-            this.imgPendu.Name = "imgPendu";
-            this.imgPendu.Size = new System.Drawing.Size(250, 250);
-            this.imgPendu.TabIndex = 1;
-            this.imgPendu.TabStop = false;
             // 
             // grpTestLettres
             // 
@@ -131,6 +113,25 @@
             this.cboLettre.TabIndex = 0;
             this.cboLettre.SelectedIndexChanged += new System.EventHandler(this.cboLettre_SelectedIndexChanged);
             // 
+            // btnRejouer
+            // 
+            this.btnRejouer.Image = global::JeuDuPendu.Properties.Resources.playagain;
+            this.btnRejouer.Location = new System.Drawing.Point(248, 216);
+            this.btnRejouer.Name = "btnRejouer";
+            this.btnRejouer.Size = new System.Drawing.Size(46, 46);
+            this.btnRejouer.TabIndex = 2;
+            this.btnRejouer.UseVisualStyleBackColor = true;
+            this.btnRejouer.Click += new System.EventHandler(this.btnRejouer_Click);
+            // 
+            // imgPendu
+            // 
+            this.imgPendu.Image = global::JeuDuPendu.Properties.Resources.pendu0;
+            this.imgPendu.Location = new System.Drawing.Point(304, 12);
+            this.imgPendu.Name = "imgPendu";
+            this.imgPendu.Size = new System.Drawing.Size(250, 250);
+            this.imgPendu.TabIndex = 1;
+            this.imgPendu.TabStop = false;
+            // 
             // frmPendu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -146,9 +147,9 @@
             this.Load += new System.EventHandler(this.frmPendu_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgPendu)).EndInit();
             this.grpTestLettres.ResumeLayout(false);
             this.grpTestLettres.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgPendu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
