@@ -56,7 +56,7 @@
             this.txtMot.Name = "txtMot";
             this.txtMot.Size = new System.Drawing.Size(249, 39);
             this.txtMot.TabIndex = 0;
-            this.txtMot.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMot_KeyPress);
+            this.txtMot.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtMot_KeyPress);
             // 
             // lblResultat
             // 
@@ -84,7 +84,7 @@
             this.btnRejouer.Size = new System.Drawing.Size(46, 46);
             this.btnRejouer.TabIndex = 2;
             this.btnRejouer.UseVisualStyleBackColor = true;
-            this.btnRejouer.Click += new System.EventHandler(this.btnRejouer_Click);
+            this.btnRejouer.Click += new System.EventHandler(this.BtnRejouer_Click);
             // 
             // imgPendu
             // 
@@ -107,7 +107,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "frmPendu";
             this.Text = "Jeu du Pendu";
-            this.Load += new System.EventHandler(this.frmPendu_Load);
+            this.Load += new System.EventHandler(this.FrmPendu_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgPendu)).EndInit();
