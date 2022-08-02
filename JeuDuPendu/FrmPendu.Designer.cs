@@ -60,6 +60,7 @@
             this.txtMot.Name = "txtMot";
             this.txtMot.Size = new System.Drawing.Size(249, 39);
             this.txtMot.TabIndex = 0;
+            this.txtMot.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMot_KeyPress);
             // 
             // lblResultat
             // 
@@ -78,6 +79,7 @@
             this.btnRejouer.Size = new System.Drawing.Size(46, 46);
             this.btnRejouer.TabIndex = 2;
             this.btnRejouer.UseVisualStyleBackColor = true;
+            this.btnRejouer.Click += new System.EventHandler(this.btnRejouer_Click);
             // 
             // imgPendu
             // 
@@ -117,6 +119,7 @@
             this.btnTest.TabIndex = 1;
             this.btnTest.Text = "TEST";
             this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // cboLettre
             // 
@@ -126,6 +129,7 @@
             this.cboLettre.Name = "cboLettre";
             this.cboLettre.Size = new System.Drawing.Size(54, 30);
             this.cboLettre.TabIndex = 0;
+            this.cboLettre.SelectedIndexChanged += new System.EventHandler(this.cboLettre_SelectedIndexChanged);
             // 
             // frmPendu
             // 
